@@ -1,15 +1,34 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require("fs");
+const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+function getViews() {
+	const views = [];
+	const viewsPath = path.resolve(__dirname, "src/html/views");
+	const files = fs.readdirSync(viewsPath);
+	files.forEach(file => {
+		views.push(
+			new HtmlWebpackPlugin({
+				title: file.replace(".html", ""),
+				filename: file,
+				template: path.resolve(viewsPath, file)
+			})
+		);
+	});
+
+	return views;
+}
 
 module.exports = {
 	entry: {
-		app: './src/js/app.js'
+		app: "./src/js/app.js"
 	},
 	output: {
-		filename: 'js/[name].[hash].js'
+		filename: "js/[name].[hash].js"
 	},
 	optimization: {
 		minimizer: [
@@ -21,36 +40,32 @@ module.exports = {
 			new OptimizeCSSAssetsPlugin({})
 		]
 	},
+	stats: {
+		children: false
+	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				exclude: /(node_modules)/,
 				use: {
-					loader: 'babel-loader',
+					loader: "babel-loader",
 					options: {
-						presets: ['@babel/preset-env']
+						presets: ["@babel/preset-env"]
 					}
 				}
 			},
 			{
 				test: /\.less$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'less-loader'
-				]
+				use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
 			}
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['dist']),
+		...getViews(),
+		new CleanWebpackPlugin(["dist"]),
 		new MiniCssExtractPlugin({
-			filename: 'css/main.[hash].css'
-		}),
-		new HtmlWebpackPlugin({
-			title: 'Index',
-			template: './src/html/views/index.html'
+			filename: "css/main.[hash].css"
 		})
 	]
-}
+};

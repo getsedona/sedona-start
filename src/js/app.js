@@ -1,6 +1,6 @@
-import './../less/global.less';
+import "./../less/global.less";
 
-import qwe, { notify } from './../components/notify';
+import qwe, { notify } from "./../components/notify";
 
 qwe();
 notify();
