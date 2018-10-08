@@ -8,14 +8,16 @@ module.exports = {
 		filename: './js/[name].js'
 	},
 	module: {
-		rules: [{
-	        test: /\.less$/,
-	        use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'less-loader'
-			]
-		}]
+		rules: [
+			{
+				test: /\.less$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'less-loader'
+				]
+			}
+		]
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
