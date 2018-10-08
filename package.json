@@ -2,7 +2,7 @@
   "name": "sedona-start",
   "version": "4.0.0",
   "scripts": {
-    "dev": "webpack --mode development",
+    "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
   "devDependencies": {
@@ -20,6 +20,7 @@
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
     "webpackbar": "^2.6.3"
   }
 }

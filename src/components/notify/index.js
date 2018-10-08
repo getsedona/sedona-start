@@ -1,9 +1,9 @@
-import './notify.less';
+import "./notify.less";
 
 export default function() {
-	console.log('default');
+	console.log("default");
 }
 
 export function notify() {
-	console.log('notify');
+	console.log("notify");
 }

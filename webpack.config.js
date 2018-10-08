@@ -51,6 +51,13 @@ module.exports = {
 		builtAt: false,
 		hash: false
 	},
+	devServer: {
+		contentBase: path.join(__dirname, "dist"),
+		compress: true,
+		port: 3000,
+		clientLogLevel: "warning",
+		stats: "errors-only"
+	},
 	module: {
 		rules: [
 			{
