@@ -1,4 +1,16 @@
 {
   "name": "sedona-start",
-  "version": "4.0.0"
+  "version": "4.0.0",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
 }
