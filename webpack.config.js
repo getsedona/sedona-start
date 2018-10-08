@@ -5,6 +5,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackBar = require("webpackbar");
 
 function getViews() {
 	const views = [];
@@ -28,7 +29,8 @@ module.exports = {
 		app: "./src/js/app.js"
 	},
 	output: {
-		filename: "js/[name].[hash].js"
+		filename: "js/[name].[hash].js",
+		path: path.resolve(__dirname, "dist")
 	},
 	optimization: {
 		minimizer: [
@@ -41,7 +43,13 @@ module.exports = {
 		]
 	},
 	stats: {
-		children: false
+		children: false,
+		version: false,
+		timings: false,
+		reasons: false,
+		moduleTrace: false,
+		builtAt: false,
+		hash: false
 	},
 	module: {
 		rules: [
@@ -66,6 +74,9 @@ module.exports = {
 		new CleanWebpackPlugin(["dist"]),
 		new MiniCssExtractPlugin({
 			filename: "css/main.[hash].css"
+		}),
+		new WebpackBar({
+			name: "sedona start"
 		})
 	]
 };
