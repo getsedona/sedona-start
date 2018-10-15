@@ -1,20 +1,9 @@
-<!doctype html>
+<%= require('html-loader!./../inc/doc-start.html') %>
 
-<html lang="ru">
+<%= require('html-loader!./../inc/page-header.html') %>
 
-<head>
-	<meta charset="utf-8">
-	<title>
-		<%= htmlWebpackPlugin.options.title %>
-	</title>
-</head>
+Hello
 
-<body>
-	<div class="notify">
-		Жопа
-	</div>
+<%= require('html-loader!./../inc/page-footer.html') %>
 
-	<%= require('html-loader!./../inc/header.html') %>
-</body>
-
-</html>
+<%= require('html-loader!./../inc/doc-end.html') %>
