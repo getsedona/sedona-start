@@ -1,0 +1,29 @@
+.link(@color) {
+	color: @color;
+	fill: @color;
+	border-bottom-width: @link-border-width;
+	border-bottom-style: solid;
+	border-bottom-color: fade(@color, @link-border-fade);
+}
+
+.link-hover(@color) {
+	@color-hover: darken(@color, @link-hover-darken);
+
+	color: @color-hover;
+	fill: @color-hover;
+	border-bottom-color: fade(@color-hover, @link-hover-border-fade);
+}
+
+.focus(@color; @width: 2px) {
+	outline: none;
+	box-shadow: 0px 0px 0px @width @color;
+
+	.no-focus & {
+		box-shadow: none;
+	}
+}
+
+.disabled(@opacity: 0.5) {
+	cursor: not-allowed;
+	opacity: @opacity;
+}

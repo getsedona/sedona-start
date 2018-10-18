@@ -1,0 +1,138 @@
+@import "./variables";
+
+.card {
+	min-height: 100%;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: @card-background-color;
+	background-image: @card-background-image;
+	background-repeat: @card-background-repeat;
+	background-position: @card-background-position;
+	background-size: @card-background-size;
+
+	&--dark-contour,
+	&--light-contour,
+	&--darken,
+	&--lighten,
+	&--fill {
+		border-radius: @card-border-radius;
+		padding-top: @card-padding;
+		padding-bottom: @card-padding;
+		margin-right: (@grid-gutter / 2);
+		margin-left: (@grid-gutter / 2);
+	}
+
+	&--dark-contour {
+		border: @card-border-width solid @card-darken-border-color;
+	}
+
+	&--light-contour {
+		border: @card-border-width solid @card-lighten-border-color;
+	}
+
+	&--darken {
+		color: @light-primary;
+		fill: @light-primary;
+		background-color: @card-darken-background-color;
+		background-image: @card-darken-background-image;
+		background-repeat: @card-darken-background-repeat;
+		background-position: @card-darken-background-position;
+		background-size: @card-darken-background-size;
+	}
+
+	&--lighten {
+		color: @dark-primary;
+		fill: @dark-primary;
+		background-color: @card-lighten-background-color;
+		background-image: @card-lighten-background-image;
+		background-repeat: @card-lighten-background-repeat;
+		background-position: @card-lighten-background-position;
+		background-size: @card-lighten-background-size;
+	}
+}
+
+.card__frame {
+	margin-bottom: @indent;
+	padding-right: (@grid-gutter / 2);
+	padding-left: (@grid-gutter / 2);
+
+	.card--dark-contour &,
+	.card--light-contour &,
+	.card--darken &,
+	.card--lighten & {
+		margin-top: -@card-padding;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.card--fill & {
+		position: absolute;
+		padding-right: 0;
+		padding-left: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	.card--darken.card--fill & {
+		opacity: @card-darken-frame-opacity;
+	}
+
+	.card--lighten.card--fill & {
+		opacity: @card-lighten-frame-opacity;
+	}
+}
+
+.card__media {
+	position: relative;
+	padding-bottom: @card-media-ratio;
+	overflow: hidden;
+	line-height: 0;
+	background-color: @base-divider;
+
+	.card--fill & {
+		padding-bottom: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	img,
+	video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.card__content {
+	position: relative;
+	padding-right: (@grid-gutter / 2);
+	padding-left: (@grid-gutter / 2);
+	max-width: 700px;
+
+	.card--dark-contour &,
+	.card--light-contour &,
+	.card--darken &,
+	.card--lighten &,
+	.card--fill & {
+		padding-right: @card-padding;
+		padding-left: @card-padding;
+	}
+
+	a::before {
+		position: absolute;
+		content: "";
+		top: -3000px;
+		right: -3000px;
+		bottom: -3000px;
+		left: -3000px;
+	}
+}

@@ -1,0 +1,51 @@
+@import "./variables";
+
+.scene {
+	background-color: @scene-background-color;
+	background-image: @scene-background-image;
+	background-repeat: @scene-background-repeat;
+	background-position: @scene-background-position;
+	background-size: @scene-background-size;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: @indent-block-smaller;
+
+	@media (min-width: @grid-breakpoints-sm) {
+		padding-right: (@grid-gutter / 2);
+		padding-left: (@grid-gutter / 2);
+	}
+
+	@media (min-width: @grid-breakpoints-md) {
+		padding-bottom: @indent-block-larger;
+	}
+
+	&--darken {
+		color: @scene-darken-color;
+		fill: @scene-darken-color;
+		background-color: @scene-darken-background-color;
+		background-image: @scene-darken-background-image;
+		background-repeat: @scene-darken-background-repeat;
+		background-position: @scene-darken-background-position;
+		background-size: @scene-darken-background-size;
+	}
+
+	&--lighten {
+		color: @scene-lighten-color;
+		fill: @scene-lighten-color;
+		background-color: @scene-lighten-background-color;
+		background-image: @scene-lighten-background-image;
+		background-repeat: @scene-lighten-background-repeat;
+		background-position: @scene-lighten-background-position;
+		background-size: @scene-lighten-background-size;
+	}
+
+	&--darken + &:not(&--darken):not(&--lighten),
+	&--lighten + &:not(&--lighten):not(&--darken),
+	&--fill {
+		padding-top: @indent-block-smaller;
+
+		@media (min-width: @grid-breakpoints-md) {
+			padding-top: @indent-block-larger;
+		}
+	}
+}
