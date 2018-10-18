@@ -2,8 +2,8 @@
   "name": "sedona-start",
   "version": "4.0.0",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "dev": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

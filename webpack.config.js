@@ -9,6 +9,8 @@ const HtmlBeautifyPlugin = require("html-beautify-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const lessToJs = require("less-vars-to-js");
 
+const mode = process.env.NODE_ENV;
+
 function getViews() {
 	const views = [];
 	const viewsPath = path.resolve(__dirname, "src/html/views");
@@ -37,7 +39,30 @@ function getLessVariables() {
 	return palette;
 }
 
+const plugins = [
+	...getViews(),
+	new CleanWebpackPlugin(["dist"]),
+	new MiniCssExtractPlugin({
+		filename: "css/[name].[hash].css"
+	}),
+	new WebpackBar({
+		name: "sedona start"
+	})
+];
+if (mode === "production") {
+	plugins.push(
+		new HtmlBeautifyPlugin({
+			config: {
+				html: {
+					indent_with_tabs: true
+				}
+			}
+		})
+	);
+}
+
 module.exports = {
+	mode,
 	entry: {
 		app: "./src/js/app.js"
 	},
@@ -99,21 +124,5 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
-		...getViews(),
-		new HtmlBeautifyPlugin({
-			config: {
-				html: {
-					indent_with_tabs: true
-				}
-			}
-		}),
-		new CleanWebpackPlugin(["dist"]),
-		new MiniCssExtractPlugin({
-			filename: "css/[name].[hash].css"
-		}),
-		new WebpackBar({
-			name: "sedona start"
-		})
-	]
+	plugins
 };
