@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackBar = require("webpackbar");
+const lessToJs = require("less-vars-to-js");
 
 function getViews() {
 	const views = [];
@@ -22,6 +23,17 @@ function getViews() {
 	});
 
 	return views;
+}
+
+function getLessVariables() {
+	const variablesPath = path.resolve(__dirname, "src/less/variables.less");
+	const paletteLess = fs.readFileSync(variablesPath, "utf8");
+	const palette = lessToJs(paletteLess, {
+		resolveVariables: true,
+		stripPrefix: true
+	});
+
+	return palette;
 }
 
 module.exports = {
@@ -73,7 +85,16 @@ module.exports = {
 			},
 			{
 				test: /\.less$/,
-				use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
+				use: [
+					MiniCssExtractPlugin.loader,
+					"css-loader",
+					{
+						loader: "less-loader",
+						options: {
+							modifyVars: getLessVariables()
+						}
+					}
+				]
 			}
 		]
 	},
@@ -81,7 +102,7 @@ module.exports = {
 		...getViews(),
 		new CleanWebpackPlugin(["dist"]),
 		new MiniCssExtractPlugin({
-			filename: "css/main.[hash].css"
+			filename: "css/[name].[hash].css"
 		}),
 		new WebpackBar({
 			name: "sedona start"
