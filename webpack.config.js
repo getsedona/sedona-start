@@ -5,6 +5,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlBeautifyPlugin = require("html-beautify-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const lessToJs = require("less-vars-to-js");
 
@@ -100,6 +101,13 @@ module.exports = {
 	},
 	plugins: [
 		...getViews(),
+		new HtmlBeautifyPlugin({
+			config: {
+				html: {
+					indent_with_tabs: true
+				}
+			}
+		}),
 		new CleanWebpackPlugin(["dist"]),
 		new MiniCssExtractPlugin({
 			filename: "css/[name].[hash].css"
